@@ -1,0 +1,4 @@
+<li class="share" onclick="share_this({id}); $('.dialog-bg').click(); ">
+	<img src="{img}">
+	<h3>{title}<span>. {desc}</span></h3>
+</li>

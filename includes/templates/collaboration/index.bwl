@@ -1,0 +1,43 @@
+<script type="text/javascript">
+	var theme_options = {
+		name: "Easy Collaboration",
+		developer: "Mehmet Onurcan KAYA",
+		desc: "Easy collaboration with your teammates. Create weekly team meeting.",
+		url: "http://onurc.an"
+	}
+</script>
+<script type="text/javascript">
+	var post_path = "#post";
+</script>
+<!-- if {is_writable} -->
+<script type="text/javascript">
+$(document).on("dblclick",function(a){if(!$(a.target).is(".post")&&!$(a.target).is(".post *")&&!$(a.target).is("ul.contextmenu")&&!$(a.target).is("ul.contextmenu *")){$(".post.new").remove();$(".posts").append('<div class="post editable editting new"></div>').children(".post.new").mouseout().remove();if($(".post.free").length>0){$(".posts").append('<div class="post free editable editting new" style="position: absolute; left: '+a.clientX+"; top: "+a.clientY+'; width: 250; border-bottom: 4px solid #3498DB; "><div class="handle"></div><h3 style="color: #3498DB; " placeholder="Baþlýk" contenteditable="true"></h3><div class="subtitle" placeholder="Alt baþlýk" contenteditable="true"></div><ul class="short editting" style="display: inline!important; "><li style="background: #3498DB; " title="Gönderiyi sil" onclick="$(this).parent().parent(\'\').remove(); "><i></i></li></ul></div>')}else{$(".posts").append('<div class="post editable editting new" style="border-bottom: 4px solid #3498DB; "><h3 style="color: #3498DB; " placeholder="Baþlýk" contenteditable="true"></h3><div class="subtitle" placeholder="Alt baþlýk" contenteditable="true"></div><ul class="short editting" style="display: block!important; "><li style="background: #3498DB; " title="Gönderiyi sil" onclick="$(this).parent().parent(\'\').remove(); "><i></i></li></ul></div>').animate({scrollTop:parseInt($(".posts").css("height").replace("px",""))+500},300)}$(".post.new h3").focus()}});
+</script>
+<!-- endif -->
+
+<!-- Title -->
+<div class="title">
+	<!-- if "{wall_avatar}" != "none" -->
+		<img src="{wall_avatar}">
+	<!-- endif -->
+
+	<h1>{wall_title}</h1><br>
+	<p>{wall_desc}</p>
+</div>
+<!--#Title -->
+
+<!-- Post -->
+<div id="post">
+	<div class="post {is_editable}" data-z="{z}" data-id="{id}">
+		<div class="subtitle" placeholder="Alt baþlýk">{subtitle}</div>
+		<div class="crs" style="color:{color}">
+			<span>|</span>
+			<div style="background-color:{color}">{title}</div>
+		</div>
+		<ul class='short'>
+			<li style="background:{color}" title='Gönderiyi sil'><i></i></li>
+			<li style="background:{color}" title='Gönderiyi düzenle'><i></i></li>
+		</ul>
+	</div>
+</div> 
+<!--#Post -->

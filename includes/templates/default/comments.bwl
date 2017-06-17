@@ -1,0 +1,5 @@
+<li>
+	<img src="{img}">
+	<h3>{author} <span>&middot; {time}</span></h3>
+	<p>{comment}</p>
+</li>

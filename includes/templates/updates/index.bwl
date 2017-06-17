@@ -1,0 +1,36 @@
+<script type="text/javascript">
+	var theme_options = {
+		name: "Updates",
+		developer: "Mehmet Onurcan KAYA",
+		desc: "Theme 4 bwallo. updates blog. Like timeline.",
+		url: "http://bwallo.com",
+		reverse: true
+	}
+</script>
+<script type="text/javascript">
+	var post_path = "#post";
+</script>
+<!-- if {is_writable} -->
+<script type="text/javascript">
+$(document).on("dblclick",function(a){if(!$(a.target).is(".post")&&!$(a.target).is(".post *")&&!$(a.target).is("ul.contextmenu")&&!$(a.target).is("ul.contextmenu *")){$(".post.new").remove();$(".posts").prepend('<div class="post editable editting new"></div>').children(".post.new").mouseout().remove();$(".posts").prepend('<div class="post editable editting new"><h3 style="color: #3498DB; " placeholder="Baþlýk" contenteditable="true"></h3> - <div class="subtitle" placeholder="Alt baþlýk" contenteditable="true"></div><ul class="short editting" style="display: block!important; "><li style="background: #3498DB; " title="Gönderiyi sil" onclick="$(this).parent().parent(\'\').remove(); "><i></i></li></ul></div>');$(".post.new h3").focus()}});
+</script>
+<!-- endif -->
+
+<!-- Title -->
+<div class="title">
+	<h1>{wall_title}</h1>
+	<p>{wall_desc}</p>
+</div>
+<!--#Title -->
+
+<!-- Post -->
+<div id="post">
+	<div class="post {is_editable}" data-id="{id}">
+		<h3 style="color: {color}; " placeholder="Baþlýk">{title}</h3> - <div class="subtitle" placeholder="Alt baþlýk">{subtitle}</div>
+		<ul class='short'>
+			<li style="background: {color}; " title='Gönderiyi sil'><i></i></li>
+			<li style="background: {color}; " title='Gönderiyi düzenle'><i></i></li>
+		</ul>
+	</div>
+</div> 
+<!--#Post -->

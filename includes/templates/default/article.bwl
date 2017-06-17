@@ -1,0 +1,158 @@
+<script type="text/javascript" src="{theme}redactor.min.js"></script>
+<link rel="stylesheet" href="{theme}redactor.css">
+<script type="text/javascript">
+$(function(){
+	if("{img}" == ""){
+		$(".article").addClass("noimg");
+	}
+	if($(".article .p > .pp").text() == ""){
+		$(".article .p > .pp").hide();
+	}
+	$(".article").css({"margin-top": $(".title").outerHeight() + 4, "height": "calc(100% - 16px - " + $(".title").css("height") + ")"});
+	$(".article .close").css({"padding-top": $(".title").height() / 2 - 6, "padding-bottom": $(".title").height() / 2 - 6});
+	$(document).on("click", "#article", function(event){
+		if(!$(event.target).is(".article") && !$(event.target).is(".article *") || $(event.target).is(".article .close")){
+			$("#article").fadeOut(100);
+			document.title = window.title;
+			history.pushState(null, null, "/" + location.pathname.substring(1, 18));
+		}
+	});
+	var scrollFade = function($element, friction, offset){
+		friction  = (friction  === undefined)? 0.5 : friction;
+		offset = (offset === undefined)? 0 : offset;
+
+		var parentHeight = $element.parent().outerHeight() * 0.5;
+		var previousOpacity = Infinity;
+
+		$(".article").scroll(function(){
+			if($(".article").scrollTop() > 300){
+				var scrollTop = Math.max(0, $(".article").scrollTop()) - 300, yOffset = ($element.outerHeight() * 0) + scrollTop * friction, opacity = 1 - (scrollTop / parentHeight - (parentHeight * offset))
+
+				if (opacity < 0 && previousOpacity < 0) return;
+			}else {
+				var opacity = 1, yOffset = 0;
+			}
+			$element.css({
+				transform: 'translate3d(0, ' + yOffset + 'px, 0)',
+				opacity: opacity
+			});
+			previousOpacity = opacity;
+		});
+	}
+	scrollFade($('header .subtitle, header h2, header .author, header .details'), 0.8, 0);
+	var likes = {like};
+	if("{liked}" == "1"){
+		$(".article .p .other li:eq(0)").addClass("active").children("span").text("Bunu beğendin");
+	}
+	$(".article .p .other li:eq(0)").click(function(){
+		if($(this).hasClass("active")){
+			$(this).removeClass("active").children("span").text("Paylaşımı beğen").siblings("i").children("span").text(likes - 1);
+			post_update({id}, "same", "same", "same", "same", "same", "same", "same", "same", 0);
+			likes -= 1;
+		}else {
+			$(this).addClass("active").children("span").text("Bunu beğendin").siblings("i").children("span").text(likes + 1);
+			post_update({id}, "same", "same", "same", "same", "same", "same", "same", "same", 1);
+			likes += 1;
+		}
+	});
+	$(".article .p .other li:eq(1)").click(function(){
+		$(".article .p textarea").focus();
+	});
+	$(".article .p textarea").on("keypress", function(event){
+		if(event.keyCode == 13 || event.which == 13){
+			var comment = $(this).val().trim();
+			if(comment != ""){
+				if($(".article .p ul.comments li:first p").text() != comment){
+					$(this).val("");
+					add_comment({id}, comment);
+				}else {
+					dialog("Hay aksi!", "Bu yorumun aynısı daha demin yapılmış...");
+				}
+			}
+			return false;
+		}
+	});
+	$(".article .p .other li:eq(2)").click(function(){
+		share();
+	});
+	if("{is_editable}" == 0){
+		$(".article header .editable").remove();
+	}
+	$(".article header .editable").on("click", function(){
+		var t = $(".article header h2").text().trim();
+		if($(".article header").css("background-image").indexOf(".jpg") == -1){
+			var s = $(".article header .subtitle").html();
+		}else {
+			var s = $(".article header .subtitle").html() + " <img src='" + $(".article header").css("background-image").slice(4, -1) + "' />";
+		}
+		var c = $(".article .p .pp").html();
+		if($(this).hasClass("save")){
+			if($(".article header").css("background-image").indexOf(".jpg") == -1){
+				var subtitle = $(".article header .subtitle").html();
+			}else {
+				var subtitle = $(".article header .subtitle").html() + " <img src='" + $(".article header").css("background-image").slice(4, -1) + "' />";
+			}
+			if($(".article .p .redactor_editor").text().trim() == ""){
+				$(".article .p .redactor_editor").html("");
+			}
+			post_update(location.pathname.substring(24).replace("/", ""), "same", "same", "same", "same", $(".article header h2").text().trim(), subtitle, "same", "same", "same", $(".article .p .redactor_editor").html());
+			$(".article .p").prepend('<div class="pp">' + $(".article .p .redactor_editor").html() + '</div>').children(".redactor_box").remove();
+			$(this).text("Paylaşımı düzenle").removeClass("save").after().siblings(".cancel").remove();
+			$(".article header h2").attr('contenteditable', 'false').siblings(".subtitle").attr('contenteditable', 'false').attr("style", "");
+		}else {
+			$(this).text("Değişiklikleri kaydet").addClass("save").after('<div class="editable cancel">X</div>').siblings(".cancel").click(function(){
+				$(".article .p").prepend('<div class="pp">' + c + '</div>').children(".redactor_box").remove();
+				$(".article header .editable").text("Paylaşımı düzenle").removeClass("save").after().siblings(".cancel").remove();
+				$(".article header h2").text(t).attr('contenteditable', 'false').siblings(".subtitle").html(s).attr('contenteditable', 'false').attr("style", "");
+			});
+			$(".article header h2").attr('contenteditable', 'true').siblings(".subtitle").attr('contenteditable', 'true').css({"position": "relative", "z-index": "9999"});
+			$(".article .p > .pp").show().redactor({
+				imageUpload: '{inc}ajax/image_upload.php',
+				fileUpload: '{inc}ajax/file_upload.php'
+			});
+		}
+	});
+});
+</script>
+<div class="article" style="border-left-color: {color}; ">
+	<div class="close">X</div>
+	<header style="background-image: url('{img}'); background-size: cover; ">
+		<div class="editable" style="background-color: {color}; ">Paylaşımı düzenle</div>
+		<h2>{title}</h2>
+		<div class="subtitle">{subtitle}</div>
+		<div class="bottom">
+			<div class="author">
+				<div class="avatar" style="background: url('{author_avatar}'); background-size: 100%; "></div>
+				<span>{author_name}</span>
+			</div>
+			<div class="details">
+				<span>{hit} görüntülenme</span>
+				<span>{created}</span>
+			</div>
+			<div class="shadow"></div>
+		</div>
+	</header>
+	<div class="p">
+		<div class="pp">{content}</div>
+		<ul class="other">
+			<li>
+				<i>
+					<span>{like}</span>
+				</i>
+				<span>Paylaşımı beğen</span>
+			</li>
+			<li>
+				<i>72</i>
+				<span>Yorum yap</span>
+			</li>
+			<li>
+				<i></i>
+				<span>Paylaş</span>
+			</li>
+		</ul>
+		<textarea placeholder="Yorumunuzu yazın..."></textarea>
+		<ul class="comments">
+			{comments}
+		</ul>
+	</div>
+</div>

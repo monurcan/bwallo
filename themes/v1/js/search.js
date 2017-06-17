@@ -1,0 +1,1 @@
+$(function(){if(window.location.search.substr(0,3)=="?do"){window.location="/search/"+window.location.search.substr(15)}});
