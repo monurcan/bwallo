@@ -5,6 +5,9 @@ duvar tabanlı sosyal ağ.
 
 ![Screenshot](ss.png)
 
+https://www.youtube.com/watch?v=SgJayZVxk3g&t=156s
+
+
 .htaccess yükleyemedim Github'a:
 
 Options +FollowSymLinks  
