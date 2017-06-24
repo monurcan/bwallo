@@ -9,7 +9,7 @@ https://www.youtube.com/watch?v=SgJayZVxk3g&t=156s
 
 
 .htaccess yükleyemedim Github'a:
-
+<pre>
 Options +FollowSymLinks  
 RewriteEngine On  
 RewriteCond %{SCRIPT_FILENAME} !-d  
@@ -29,6 +29,7 @@ RewriteRule ^page/([^.]+)/$ index.php?do=page&page_name=$1
 RewriteRule ^search/([^.]+)$ index.php?do=search&src=$1
 RewriteRule ^search/([^.]+)/$ index.php?do=search&src=$1
 ErrorDocument 404 "<script type='text/javascript'>window.location.href = '/404'</script>"
+</pre>
 
 **Kurulum**
 
