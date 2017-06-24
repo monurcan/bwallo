@@ -31,6 +31,7 @@ RewriteRule ^search/([^.]+)/$ index.php?do=search&src=$1
 ErrorDocument 404 "<script type='text/javascript'>window.location.href = '/404'</script>"
 
 **Kurulum**
+
 0. Yukarıdaki .htaccess'i bir metin düzenleyicisine atıp ardından .htaccess adıyla proje ana dizinine kaydedin.
 1. MySQL'de bir database oluşturup "bwallo.sql"i import edin.
 1.1. [Opsiyonel] Şimdi ise general_settings table'ındaki site_url'i kendinize göre ayarlamanız gerekiyor. Direkt localhost olarak kalabilir. IP üzerinden yayın yapacaksanız SQL update ile güncelleyebilirsiniz.
