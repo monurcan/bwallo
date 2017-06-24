@@ -39,7 +39,7 @@ CREATE TABLE `general_settings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `general_settings` (`site_url`, `site_title`, `site_desc`, `site_desc_en`, `site_keyw`, `site_theme`, `site_favicon`, `site_status`, `site_email`) VALUES
-('http://195.155.192.151', 'bwallo.', 'duvarını yarat!', 'create your wall!', 'duvar, pano, bwallo, yarat, blog, miniblog, paylaş', 'v1', 'includes/src/favicon.ico', 1, 'bwallo@bwallo.com');
+('http://localhost', 'bwallo.', 'duvarını yarat!', 'create your wall!', 'duvar, pano, bwallo, yarat, blog, miniblog, paylaş', 'v1', 'includes/src/favicon.ico', 1, 'bwallo@bwallo.com');
 
 CREATE TABLE `notifications` (
   `notif_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -105,7 +105,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=79 ;
 
 INSERT INTO `users` (`user_id`, `user_fullname`, `user_name`, `user_pass`, `user_email`, `user_avatar`, `user_cover`, `user_about`, `user_time`, `user_rank`, `user_hash`, `user_weeklynotif`, `user_commentnotif`) VALUES
-(1, 'İsimsiz', 'İsimsiz', '', '', 'http://176.234.160.253/includes/src/default-avatar.png', 'http://176.234.160.253/includes/src/default-cover.png', '', '2013-12-20 20:20:52', 0, '', 0, 0),
+(1, 'İsimsiz', 'İsimsiz', '', '', 'http://localhost/includes/src/default-avatar.png', 'http://localhost/includes/src/default-cover.png', '', '2013-12-20 20:20:52', 0, '', 0, 0),
 
 CREATE TABLE `user_avatars` (
   `avatar_id` int(11) NOT NULL AUTO_INCREMENT,
