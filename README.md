@@ -47,4 +47,4 @@ UPDATE `general_settings` SET `site_title`="[İSTEDİĞİNİZ SİTE BAŞLIĞI]"
 
 4. Terminalde *cd* komutu ile proje ana dizinine gelin [örneğin Mac için cd /Applications/MAMP/htdocs/ ve ardından "node server.js" komutuyla server.js'i çalıştırın. [Node.js bilgisayarınızda yüklü olmalı tabii. Bkz.: https://nodejs.org/en/download/]
 
-5. Kurulumuz tamamlanmıştır.
+5. Kurulumuz tamamlanmıştır. Temada değişiklik yapmak için /themes/v1 dizinine gidebilirsiniz. Dilerseniz yeni tema da oluşturabilirsiniz...
